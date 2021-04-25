@@ -36,3 +36,5 @@ Messenger: zároveň máme messenger skupinu, kde se domlouváme na časech, kdy
 
 SYSTÉM PRO ZPRÁVU VERZÍ:
 GitHub: založili jsme si vlastní GitHub, kam může nahlížet vyučující emailem ivs.kontrola@gmail.com
+
+
