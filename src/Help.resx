@@ -141,6 +141,9 @@ modulo		m
 faktoriál	f
 mocnina	p
 odmocnina	r
+rovná se	e
+delete		backspace, delete
+nápověda	h
 
 PŘÍKLADY VÝPOČTŮ
 sčítání		číslo1 + číslo2 = výsledek
