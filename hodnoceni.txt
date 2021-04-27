@@ -1,0 +1,4 @@
+xjurci08 100 (základ GUI a mat. operace)
+xzahal03 100 (dokumentace, prezentace)
+xester02 100 (readme, instalátor)
+xstoll01 100 (testy, profiling, makefile)
