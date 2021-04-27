@@ -232,7 +232,7 @@ namespace Calculater
                 button22.PerformClick();
             else if (e.KeyCode.Equals(Keys.E))          //equal
                 button11.PerformClick();
-            else if (e.KeyCode.Equals(Keys.Back))       //delete
+            else if (e.KeyCode.Equals(Keys.Back) || e.KeyCode.Equals(Keys.Delete))       //delete
                 button12.PerformClick();
         }
     }
