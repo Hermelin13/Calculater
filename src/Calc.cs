@@ -14,8 +14,6 @@ namespace Calculater
 {
     public partial class Calc : Form
     {
-        //Math count = new Math ();
-
         double num1 = 0;    //first number
         double num2 = 0;    //second number
         String op = "";     //math symbol
@@ -134,7 +132,6 @@ namespace Calculater
 
 
             //calculations
-            //count.operations()
             switch (op)
             {
                 case "+": //plus
