@@ -1,0 +1,9 @@
+GBV-mulgoro - xjurci08, xzahal03, xester02, xstoll01
+
+Rozdíl mezi plánem a realitou
+
+1. Nepovedlo se nám dodržet deadliny, jelikož jsme dělali i jiné projekty do školy a tak jsme občas dali přednost jim.
+
+2. Rozdělení funkcí jsem dodrželi až na pár výjimek. Třeba před odevzdáním produktu někdo udělal nějakou maličkost za něj aby se zrychlil proces.
+
+3. Nepovedlo se nám dodržet úplně strukturu repozitáře na GITHubu.
