@@ -10,13 +10,28 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using math_library;
 
+/// <summary>
+/// Hlavní zdrojový kód pro Calculater.
+/// </summary>
 namespace Calculater
 {
+    /// <summary>
+    /// Hlavní třída.
+    /// </summary> 
+    /// <param name="num1">první zadané číslo</param>
+    /// <param name="num2">druhé zadané číslo</param>
+    /// <param name="op">zadaný znak pro výpočet</param>
+    /// <param name="fact_pressed">je true, pokud se zadal faktoriál</param>
+    /// <param name="op_pressed">je true, pokud se zadal znak pro výpočet</param>
+    /// <param name="minus_pressed">je true, pokud je na inputu negativní číslo</param>
+    /// <param name="power_pressed">je true, pokud se zadala mocnina</param>
+    /// <param name="equal_pressed">je true, pokud se zadalo "rovná se"</param>
+    /// <param name="number_pressed">je true, pokud se zadalo číslo nebo čárka</param>
     public partial class Calc : Form
     {
-        double num1 = 0;    //first number
-        double num2 = 0;    //second number
-        String op = "";     //math symbol
+        double num1 = 0;    //první číslo
+        double num2 = 0;    //druhé číslo
+        String op = "";     //znak operace
         bool fact_pressed = false;
         bool op_pressed = false;
         bool minus_pressed = false;
@@ -29,7 +44,10 @@ namespace Calculater
             InitializeComponent();
         }
 
-        //numbers and coma pressed
+        //čísla a čárka
+        /// <summary>
+        /// Výpis čísel.
+        /// </summary> 
         private void number(object sender, EventArgs e)
         {
             //text reset 
@@ -41,7 +59,7 @@ namespace Calculater
             }
             Button button = (Button)sender;
 
-            //coma exclusion
+            //vynechání čarky po druhém zmáčnknutí
             if (button.Text == ",")
             {
                 if (!input.Text.Contains(","))
@@ -53,21 +71,27 @@ namespace Calculater
             number_pressed = true;
         }
 
-        //pressed C (delete)
+        //zmáčknuté C (delete)
+        /// <summary>
+        /// Smazání inputu.
+        /// </summary>
         private void delete(object sender, EventArgs e)
         {
             input.Text = " ";
             overview.Text = "";
         }
 
-        //math symbol pressed
+        //znak operca zmáčknutý
+        /// <summary>
+        /// Načtení znaku operace a prvního čísla.
+        /// </summary>
         private void op_press(object sender, EventArgs e)
         {
             
             Button button = (Button)sender;
             if (((input.Text == " ") && (button.Text == "-")) || (op_pressed))
             {
-                if (op_pressed) //negative number
+                if (op_pressed) //záporné číslo
                     minus_pressed = true;
 
                 equal_pressed = false;
@@ -80,12 +104,12 @@ namespace Calculater
             }
             else if (number_pressed)
             {
-                if (button.Text == "!") //factorial
+                if (button.Text == "!") //faktoriál
                 {
                     overview.Text = input.Text + button.Text;
                     fact_pressed = true;
                 }
-                else if (button.Text == "^") //exponentiation
+                else if (button.Text == "^") //mocnina
                 {
                     power_pressed = true;
                     overview.Text = "(" + input.Text + ")" + button.Text;
@@ -93,7 +117,7 @@ namespace Calculater
                 else
                     overview.Text = input.Text + button.Text;
 
-                //first number saved
+                //uložení prvního čísla
                 num1 = double.Parse(input.Text);
                 op = button.Text;
                 op_pressed = true;
@@ -103,24 +127,27 @@ namespace Calculater
                 input.Text = "chybí číslo";
         }
 
-        //equal pressed
+        //zmáčknuté číslo
+        /// <summary>
+        /// Načtení druhého čísla a "rovná se".
+        /// </summary>
         private void op_equal(object sender, EventArgs e)
         {
             Button button = (Button)sender;
 
-            if (fact_pressed) //factorial
+            if (fact_pressed) //faktoriál
             {
                 overview.Text = overview.Text + button.Text;
                 fact_pressed = false;
             }
-            else if (minus_pressed) //negative number needs brackets
+            else if (minus_pressed) //záporné číslo potřebuje závorky
             {
                 num2 = double.Parse(input.Text);
                 overview.Text = num1 + op + "(" + num2 + ")" + button.Text;
             }
             else if (power_pressed)
             {
-                num2 = double.Parse(input.Text); //exponentiation with brackets
+                num2 = double.Parse(input.Text); //mocnina se závorkama
                 overview.Text = "(" + num1 + ")" + op + num2 + button.Text;
             }
             else
@@ -131,35 +158,35 @@ namespace Calculater
 
 
 
-            //calculations
+            //výpočet
             switch (op)
             {
-                case "+": //plus
+                case "+": //sčítání
                     input.Text = mathematics.Plus(num1, num2).ToString();
                     break;
 
-                case "-": //minus
+                case "-": //odčítání
                     input.Text = mathematics.Minus(num1, num2).ToString();
                     break;
 
-                case "*": //multiplication
+                case "*": //násobení
                     input.Text = mathematics.Mult(num1, num2).ToString();
                     break;
 
-                case "/": //division
+                case "/": //dělení
                     input.Text = mathematics.Div(num1, num2).ToString();
                     break;
 
-                case "^": //exponentiation
+                case "^": //mocnina
                     input.Text = mathematics.Exp(num1, num2).ToString();
                     break;
 
-                case "√": //square root
+                case "√": //odmocnina
                     input.Text = mathematics.Sqrt(num1, num2).ToString();
                     break;
 
-                case "!": //factorial
-                    input.Text = mathematics.Fact(num1, num2).ToString();
+                case "!": //faktoriál
+                    input.Text = mathematics.Fact(num1).ToString();
                     break;
 
                 case "%": //modulo
@@ -178,13 +205,19 @@ namespace Calculater
             equal_pressed = true;
         }
 
-        //help pressed
+        //zmáčknuté help
+        /// <summary>
+        /// Volání sekce Help.
+        /// </summary>
         private void help(object sender, EventArgs e)
         {
             new Help().Show();
         }
 
-        //keyboard access
+        //přístup z klávesnice
+        /// <summary>
+        /// Přístup pomocí klávesnice.
+        /// </summary>
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode.Equals(Keys.NumPad0))         //0
@@ -217,17 +250,17 @@ namespace Calculater
                 button14.PerformClick();
             else if (e.KeyCode.Equals(Keys.Divide))     //"/"
                 button13.PerformClick();
-            else if (e.KeyCode.Equals(Keys.F))          //factorial
+            else if (e.KeyCode.Equals(Keys.F))          //faktoriál
                 button16.PerformClick();
             else if (e.KeyCode.Equals(Keys.M))          //modulo
                 button21.PerformClick();
-            else if (e.KeyCode.Equals(Keys.P))          //exponentiation
+            else if (e.KeyCode.Equals(Keys.P))          //mocnina
                 button10.PerformClick();
-            else if (e.KeyCode.Equals(Keys.R))          //square root
+            else if (e.KeyCode.Equals(Keys.R))          //odmocnina
                 button20.PerformClick();
             else if (e.KeyCode.Equals(Keys.H))          //help
                 button22.PerformClick();
-            else if (e.KeyCode.Equals(Keys.E))          //equal
+            else if (e.KeyCode.Equals(Keys.E))          //=
                 button11.PerformClick();
             else if (e.KeyCode.Equals(Keys.Back) || e.KeyCode.Equals(Keys.Delete))       //delete
                 button12.PerformClick();
