@@ -1,0 +1,2 @@
+Program tráví nejvíce času u načítání čísel, jednotlivé matematické operace jsou jednoduché a velmi rychlé.
+Optimalizovat by se vyplatila část kódu, která načítá čísla z stdin.
