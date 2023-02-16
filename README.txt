@@ -1,3 +1,5 @@
+Projekt byl vytvořen pro předmět IVS na vysoké škole VUT FIT
+
 Prostredi
 ---------
 Windows 64bit
